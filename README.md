@@ -105,7 +105,7 @@ To run the repository, you must have the following installed on your computer
 ## Usage
 
 - In progress
-- Try see in https://reactjs-forum.onrender.com/
+- Try see in -
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
@@ -130,7 +130,7 @@ Linkedin: [https://cl.linkedin.com/in/jdiazmatte](https://cl.linkedin.com/in/jdi
 
 ## Acknowledgments
 
-- react-router-doom , react-redux, redux-devtools-extension, axios, redux-thunk, redux, react-bootstrap, bootstrap
+- react-router-doom , react-redux, redux-devtools-extension, axios, redux-thunk, redux, react-bootstrap, bootstrap,@heroicons/react, @heroicons/react@v1
 
 - [Choose an Open Source License](https://choosealicense.com)
 

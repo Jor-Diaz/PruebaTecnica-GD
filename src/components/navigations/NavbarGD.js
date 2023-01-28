@@ -39,28 +39,6 @@ export default function NavbarGD() {
                 </NavLink>
               ))}
             </Nav>
-            <Nav>
-              <form
-                className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
-                role="search"
-              >
-                <input
-                  type="search"
-                  className="form-control form-control-dark text-bg-dark"
-                  placeholder="Search Post.."
-                  aria-label="Search"
-                ></input>
-              </form>
-
-              <div className="text-end">
-                <button type="button" className="btn btn-outline-light me-2">
-                  Login
-                </button>{" "}
-                <button type="button" className="btn btn-warning">
-                  Sign-up
-                </button>{" "}
-              </div>
-            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
