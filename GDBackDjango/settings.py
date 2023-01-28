@@ -26,7 +26,6 @@ INSTALLED_APPS = [
 ]
 
 PROJECT_APPS = [
-    'apps.dashboard',
     'apps.api',
 ]
 THIRD_PARTY_APPS = [
