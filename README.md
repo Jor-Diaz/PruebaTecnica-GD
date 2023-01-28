@@ -130,6 +130,8 @@ Linkedin: [https://cl.linkedin.com/in/jdiazmatte](https://cl.linkedin.com/in/jdi
 
 ## Acknowledgments
 
+- react-router-doom , react-redux, redux-devtools-extension, axios, redux-thunk, redux, react-bootstrap, bootstrap
+
 - [Choose an Open Source License](https://choosealicense.com)
 
 * [othneildrew -Template README](https://github.com/othneildrew/Best-README-Template)

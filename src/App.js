@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Error404 from "containers/errors/Error404";
+import Estaciones from "containers/pages/Estaciones";
+import Home from "containers/pages/Home";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import store from "./store";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* Error Page */}
+          <Route path="*" element={<Error404 />} />
+          {/* Home Page */}
+          <Route path="/" element={<Home />} />
+          {/* Estaciones List */}
+          <Route path="/estaciones" element={<Estaciones />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 

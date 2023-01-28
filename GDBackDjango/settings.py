@@ -12,7 +12,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 
 DEBUG = True
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost","*"]
 
 
 # Application definition
@@ -29,7 +29,10 @@ PROJECT_APPS = [
     'apps.dashboard',
     'apps.api',
 ]
-THIRD_PARTY_APPS=[]
+THIRD_PARTY_APPS = [
+    'rest_framework',
+    'corsheaders',
+]
 INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
@@ -40,6 +43,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'GDBackDjango.urls'
