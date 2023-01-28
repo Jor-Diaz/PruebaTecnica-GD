@@ -1,12 +1,25 @@
-import EstacionCard from "./EstacionCard";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { Table, Pagination } from "react-bootstrap";
-import PaginationGD from "./Paginacion";
+
 import { connect } from "react-redux";
 import { useState } from "react";
 import { post_estaciones_list_page } from "redux/actions/estaciones";
 
 function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
+  function ShowDataEstacion(nombre, horario) {
+    setShow(true);
+    setNombre(nombre);
+    setHorario(horario);
+  }
   const [active, setCount] = useState(1);
+  const [show, setShow] = useState(false);
+  const [horarioEstacion, setHorario] = useState("");
+  const [nombreEstacion, setNombre] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   let items = [];
   for (let number = 1; number <= 3; number++) {
     items.push(
@@ -29,6 +42,17 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
     <>
       {estaciones_list ? (
         <div className="container ms-auto border mt-5">
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Horario Estación {nombreEstacion} </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{horarioEstacion}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Cerrar
+              </Button>
+            </Modal.Footer>
+          </Modal>
           <Table className="responsive" striped>
             <thead>
               <tr>
@@ -48,7 +72,19 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
                   <td>{estacion["NOMBRE FANTASIA"]}</td>
                   <td>{estacion["DIRECCION"]}</td>
                   <td>{estacion["COMUNA"]}</td>
-                  <td>Horario</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() =>
+                        ShowDataEstacion(
+                          estacion["NOMBRE FANTASIA"],
+                          estacion["HORARIO REFERENCIAL"]
+                        )
+                      }
+                    >
+                      Horario
+                    </Button>
+                  </td>
                 </tr>
               ))}
             </tbody>
