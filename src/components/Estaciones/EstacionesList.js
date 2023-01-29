@@ -1,11 +1,11 @@
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { Table, Pagination } from "react-bootstrap";
-
+import { Table, Pagination, Button, Modal, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useState } from "react";
 import { post_estaciones_list_page } from "redux/actions/estaciones";
+import Col from "react-bootstrap/Col";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
+import Row from "react-bootstrap/Row";
 function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
   function ShowDataEstacion(nombre, horario) {
     setShow(true);
@@ -16,18 +16,24 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
   const [show, setShow] = useState(false);
   const [horarioEstacion, setHorario] = useState("");
   const [nombreEstacion, setNombre] = useState("");
+  const [pageStateGD, setPageGD] = useState(0);
+  const [codeStateGD, setCodeGD] = useState("");
+  const [comunaStateGD, setComunaGD] = useState("");
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   let items = [];
   for (let number = 1; number <= 3; number++) {
     items.push(
       <Pagination.Item
-        key={number - 1}
+        key={number}
         active={number === active}
         onClick={(event) => (
-          post_estaciones_list_page(parseInt(event.target.text) - 1),
+          post_estaciones_list_page(
+            parseInt(event.target.text) - 1,
+            codeStateGD,
+            comunaStateGD
+          ),
           setCount(parseInt(event.target.text))
         )}
       >
@@ -36,7 +42,7 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
     );
   }
   useState(() => {
-    post_estaciones_list_page(0);
+    post_estaciones_list_page(0, "", "");
   }, []);
   return (
     <>
@@ -53,10 +59,46 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
               </Button>
             </Modal.Footer>
           </Modal>
+
+          <Row className="g-2 m-3 ms-auto">
+            <Col md>
+              <FloatingLabel controlId="floatingInputGrid" label="Comuna">
+                <Form.Control
+                  type="text"
+                  onChange={(event) => {
+                    setComunaGD(event.target.value);
+                  }}
+                />
+              </FloatingLabel>
+            </Col>
+            <Col md>
+              <FloatingLabel controlId="floatingInputGrid" label="Código Linea">
+                <Form.Control
+                  type="text"
+                  onChange={(event) => {
+                    setCodeGD(event.target.value);
+                  }}
+                />
+              </FloatingLabel>
+            </Col>
+            <Col md className="m-3 ms-auto ">
+              <Button
+                aria-label="Floating label select example"
+                variant="outline-primary"
+                size="lg"
+                onClick={(event) => (
+                  post_estaciones_list_page(0, codeStateGD, comunaStateGD),
+                  setCount(parseInt(event.target.text))
+                )}
+              >
+                Filtrar
+              </Button>
+            </Col>
+          </Row>
+
           <Table className="responsive" striped>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Código Linea</th>
                 <th>Nombre Fantasia</th>
                 <th>Dirección</th>
@@ -67,7 +109,6 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
             <tbody>
               {estaciones_list.map((estacion) => (
                 <tr key={estacion._id}>
-                  <td>{estacion._id}</td>
                   <td>{estacion["CODIGO"]}</td>
                   <td>{estacion["NOMBRE FANTASIA"]}</td>
                   <td>{estacion["DIRECCION"]}</td>

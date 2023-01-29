@@ -12,7 +12,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 
 DEBUG = True
-ALLOWED_HOSTS = ["localhost","*"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,18 +37,19 @@ INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', #here
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_URLS_REGEX = r'^/api/.*$'
 
 ROOT_URLCONF = 'GDBackDjango.urls'
 
@@ -104,13 +105,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'es-cl'
+TIME_ZONE = 'America/Santiago'
 USE_I18N = True
+USE_L10N = True
+USE_TZ = False
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

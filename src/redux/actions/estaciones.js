@@ -32,13 +32,15 @@ export const post_estaciones_list = () => async (dispatch) => {
   }
 };
 
-export const post_estaciones_list_page = (p) => async (dispatch) => {
+export const post_estaciones_list_page = (p, code, cm) => async (dispatch) => {
   const config = {
     headers: {
       Accept: "application/json",
     },
     data: {
       p: p,
+      code: code,
+      cm: cm,
     },
   };
   try {

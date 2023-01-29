@@ -15,7 +15,6 @@ export default function estaciones(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case POST_ESTACIONES_LIST_SUCCESS:
-      console.log(payload);
       return {
         ...state,
         estaciones_list: payload.result.records,
