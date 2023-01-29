@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   backend:
-    container_name: PruebaTecniga-GD-JorgeDiaz
+    container_name: PruebaTecnica-GD-JorgeDiaz
     build: .
     command: python3 manage.py runserver 0.0.0.0:8000
     ports:

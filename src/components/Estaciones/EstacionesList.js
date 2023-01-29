@@ -1,12 +1,16 @@
 import { Table, Pagination, Button, Modal, Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { post_estaciones_list_page } from "redux/actions/estaciones";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 import Row from "react-bootstrap/Row";
-function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
+function EstacionesDetail({
+  estaciones_list,
+  post_estaciones_list_page,
+  count = 136,
+}) {
   function ShowDataEstacion(nombre, horario) {
     setShow(true);
     setNombre(nombre);
@@ -16,34 +20,46 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
   const [show, setShow] = useState(false);
   const [horarioEstacion, setHorario] = useState("");
   const [nombreEstacion, setNombre] = useState("");
-  const [pageStateGD, setPageGD] = useState(0);
+  const [paginationItem, setPaginationItems] = useState([]);
   const [codeStateGD, setCodeGD] = useState("");
   const [comunaStateGD, setComunaGD] = useState("");
 
   const handleClose = () => setShow(false);
 
-  let items = [];
-  for (let number = 1; number <= 3; number++) {
-    items.push(
-      <Pagination.Item
-        key={number}
-        active={number === active}
-        onClick={(event) => (
-          post_estaciones_list_page(
-            parseInt(event.target.text) - 1,
-            codeStateGD,
-            comunaStateGD
-          ),
-          setCount(parseInt(event.target.text))
-        )}
-      >
-        {number}
-      </Pagination.Item>
-    );
+  function setPagination(count, active_aux) {
+    let items = [];
+    for (
+      let number = 1;
+      number <= parseInt(count / 50) + (parseInt(count % 50) != 0 ? 1 : 0);
+      number++
+    ) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={number === active_aux}
+          onClick={(event) => (
+            post_estaciones_list_page(
+              parseInt(event.target.text) - 1,
+              codeStateGD,
+              comunaStateGD
+            ),
+            setCount(parseInt(event.target.text)),
+            setPagination(count, parseInt(event.target.text))
+          )}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+    setPaginationItems(items);
   }
   useState(() => {
     post_estaciones_list_page(0, "", "");
   }, []);
+  useEffect(() => {
+    setPagination(count, 1);
+  }, [count]);
+
   return (
     <>
       {estaciones_list ? (
@@ -88,7 +104,8 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
                 size="lg"
                 onClick={(event) => (
                   post_estaciones_list_page(0, codeStateGD, comunaStateGD),
-                  setCount(parseInt(event.target.text))
+                  setCount(parseInt(event.target.text)),
+                  setPagination(count, 1)
                 )}
               >
                 Filtrar
@@ -100,7 +117,7 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
             <thead>
               <tr>
                 <th>Código Linea</th>
-                <th>Nombre Fantasia</th>
+                <th>Nombre Fantasía</th>
                 <th>Dirección</th>
                 <th>Comuna</th>
                 <th>Ver Horario</th>
@@ -130,7 +147,7 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
               ))}
             </tbody>
             <tfoot>
-              <Pagination>{items}</Pagination>
+              <Pagination>{paginationItem}</Pagination>
             </tfoot>
           </Table>
         </div>
@@ -143,6 +160,7 @@ function EstacionesDetail({ estaciones_list, post_estaciones_list_page }) {
 
 const mapStateToProps = (state) => ({
   estaciones_list: state.estaciones.estaciones_list,
+  count: state.estaciones.count,
 });
 
 export default connect(mapStateToProps, {

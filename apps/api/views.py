@@ -43,14 +43,14 @@ def index(request):
         page_aux = 0
         code_aux = ""
         cm_aux = ""
-        if "data" in request.data.keys() and "p" in request.data['data']:            
+        if "data" in request.data.keys() and "p" in request.data['data'] and request.data["data"]["p"] != None:                        
             page_aux = int(request.data["data"]["p"])
             offset_aux = 50*int(request.data["data"]["p"])
             data_post["offset"] = offset_aux
-        if "data" in request.data.keys() and "code" in request.data['data'] and  request.data['data']["code"]!="" :            
+        if "data" in request.data.keys() and "code" in request.data['data'] and  request.data['data']["code"]!="" and request.data["data"]["code"] != None :            
             code_aux = request.data["data"]["code"].upper()    
             data_post["filters"]["CODIGO"] = code_aux
-        if "data" in request.data.keys() and "cm" in request.data['data'] and  request.data['data']["cm"]!="" :            
+        if "data" in request.data.keys() and "cm" in request.data['data'] and  request.data['data']["cm"]!="" and request.data["data"]["cm"] != None :            
             cm_aux = request.data["data"]["cm"].upper()    
             data_post["filters"]["COMUNA"] = cm_aux    
         
