@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 function Home() {
   return (
     <TemplateLayout>
-      <div className="container">Holas, contratenme por favor 🥹</div>
+      <div className="container ms-auto  mt-5">
+        <h2>Holas, contratenme por favor 🥹</h2>
+      </div>
     </TemplateLayout>
   );
 }

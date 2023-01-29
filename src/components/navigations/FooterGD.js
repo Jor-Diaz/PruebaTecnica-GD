@@ -31,48 +31,38 @@ export default function FooterGD() {
           <div className="col mb-3"></div>
 
           <div className="col mb-3">
-            <h5>Data</h5>
+            <h5>Prueba Técnica</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
-                  Home
+                <a href="/estaciones" className="nav-link p-0 text-muted">
+                  Listado Estaciones
                 </a>
               </li>
               <li className="nav-item mb-2">
                 <a href="#" className="nav-link p-0 text-muted">
-                  Features
-                </a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
-                  Contact
-                </a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
-                  About
+                  Inicio
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="col mb-3">
-            <h5>Links</h5>
+            <h5>Información</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
                 <a href="#" className="nav-link p-0 text-muted">
-                  Sign Up
+                  Log Cache
                 </a>
               </li>
               <li className="nav-item mb-2">
                 <a href="#" className="nav-link p-0 text-muted">
-                  Login
+                  Contacto
                 </a>
               </li>
             </ul>
           </div>
           <div className="col mb-3">
-            <h5>My Contact</h5>
+            <h5>Contacto</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
                 <a

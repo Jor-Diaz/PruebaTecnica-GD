@@ -4,9 +4,8 @@ import { NavLink } from "react-router-dom";
 
 const navegation = [
   { name: "Estaciones", href: "/estaciones", current: "false" },
-  { name: "Features", href: "/features", current: "false" },
-  { name: "About", href: "/about", current: "false" },
-  { name: "Contact", href: "/contact", current: "false" },
+  { name: "LogCache", href: "/logcache", current: "false" },
+  { name: "Contacto", href: "/contacto", current: "false" },
 ];
 
 export default function NavbarGD() {
@@ -23,7 +22,7 @@ export default function NavbarGD() {
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />
-            Home{" "}
+            Inicio{" "}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

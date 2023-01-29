@@ -3,8 +3,14 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from .models import CacheCallsGD
-import json
 import ast
+from rest_framework.generics import ListAPIView
+from .serializers import *
+
+class LogCacheList(ListAPIView):		
+	serializer_class = LogCacheSerializer
+	def get_queryset(self):
+		return CacheCallsGD.objects.all()
 
 def generate_request(payload):
     response = requests.post('https://datos.gob.cl/api/3/action/datastore_search',json=payload)
@@ -12,7 +18,6 @@ def generate_request(payload):
         return response.json()
     else:
         return {'error':'error'}
-
 
 def create_cache_register(page_aux,code_aux,cm_aux,result):
     aux_cache_register = CacheCallsGD()
