@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { post_estaciones_list_page } from "redux/actions/estaciones";
 import Col from "react-bootstrap/Col";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import gifimage from "media/giphy.gif";
 
 import Row from "react-bootstrap/Row";
 function EstacionesDetail({
@@ -16,8 +17,12 @@ function EstacionesDetail({
     setNombre(nombre);
     setHorario(horario);
   }
-  const [active, setCount] = useState(1);
+
   const [show, setShow] = useState(false);
+  const [showTable, setShowTable] = useState(false);
+  const [showMensaje, setShowMessage] = useState(true);
+  const [showLoading, setLoadingGif] = useState(false);
+
   const [horarioEstacion, setHorario] = useState("");
   const [nombreEstacion, setNombre] = useState("");
   const [paginationItem, setPaginationItems] = useState([]);
@@ -27,31 +32,40 @@ function EstacionesDetail({
   const handleClose = () => setShow(false);
 
   function setPagination(count, active_aux) {
+    setLoadingGif(false);
+    if (count === 0) {
+      setShowTable(true);
+      setShowMessage(false);
+    } else {
+      setShowTable(false);
+      setShowMessage(true);
+    }
     let items = [];
     for (
       let number = 1;
-      number <= parseInt(count / 50) + (parseInt(count % 50) != 0 ? 1 : 0);
+      number <= parseInt(count / 50) + (parseInt(count % 50) !== 0 ? 1 : 0);
       number++
     ) {
       items.push(
         <Pagination.Item
           key={number}
           active={number === active_aux}
-          onClick={(event) => (
+          onClick={(event) => {
             post_estaciones_list_page(
               parseInt(event.target.text) - 1,
               codeStateGD,
               comunaStateGD
-            ),
-            setCount(parseInt(event.target.text)),
-            setPagination(count, parseInt(event.target.text))
-          )}
+            );
+            setPagination(count, parseInt(event.target.text));
+          }}
         >
           {number}
         </Pagination.Item>
       );
     }
+
     setPaginationItems(items);
+    setLoadingGif(true);
   }
   useState(() => {
     post_estaciones_list_page(0, "", "");
@@ -102,54 +116,74 @@ function EstacionesDetail({
                 aria-label="Floating label select example"
                 variant="outline-primary"
                 size="lg"
-                onClick={(event) => (
-                  post_estaciones_list_page(0, codeStateGD, comunaStateGD),
-                  setCount(parseInt(event.target.text)),
-                  setPagination(count, 1)
-                )}
+                onClick={(event) => {
+                  setLoadingGif(false);
+                  post_estaciones_list_page(0, codeStateGD, comunaStateGD);
+                  setPagination(count, 1);
+                }}
               >
                 Filtrar
               </Button>
             </Col>
           </Row>
+          <div hidden={showMensaje}>
+            <h2>No hay resultados</h2>
+          </div>
+          <Row hidden={showLoading} className="mx-auto mb-3">
+            <div className="mx-auto text-center">
+              <img
+                src={gifimage}
+                className="d-inline-block align-top"
+                alt="React Bootstrap logo"
+                width="70"
+                height="70"
+                alt="loading..."
+              />
+            </div>
+          </Row>
 
-          <Table className="responsive" striped>
-            <thead>
-              <tr>
-                <th>Código Linea</th>
-                <th>Nombre Fantasía</th>
-                <th>Dirección</th>
-                <th>Comuna</th>
-                <th>Ver Horario</th>
-              </tr>
-            </thead>
-            <tbody>
-              {estaciones_list.map((estacion) => (
-                <tr key={estacion._id}>
-                  <td>{estacion["CODIGO"]}</td>
-                  <td>{estacion["NOMBRE FANTASIA"]}</td>
-                  <td>{estacion["DIRECCION"]}</td>
-                  <td>{estacion["COMUNA"]}</td>
-                  <td>
-                    <Button
-                      variant="primary"
-                      onClick={() =>
-                        ShowDataEstacion(
-                          estacion["NOMBRE FANTASIA"],
-                          estacion["HORARIO REFERENCIAL"]
-                        )
-                      }
-                    >
-                      Horario
-                    </Button>
-                  </td>
+          <div hidden={showTable} className="table_aux">
+            <Table
+              className="table table-striped table-bordered nowrap dataTable"
+              striped
+            >
+              <thead>
+                <tr>
+                  <th>Código Linea</th>
+                  <th>Nombre Fantasía</th>
+                  <th>Dirección</th>
+                  <th>Comuna</th>
+                  <th>Ver Horario</th>
                 </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <Pagination>{paginationItem}</Pagination>
-            </tfoot>
-          </Table>
+              </thead>
+              <tbody>
+                {estaciones_list.map((estacion) => (
+                  <tr key={estacion._id}>
+                    <td>{estacion["CODIGO"]}</td>
+                    <td>{estacion["NOMBRE FANTASIA"]}</td>
+                    <td>{estacion["DIRECCION"]}</td>
+                    <td>{estacion["COMUNA"]}</td>
+                    <td>
+                      <Button
+                        variant="primary"
+                        onClick={() =>
+                          ShowDataEstacion(
+                            estacion["NOMBRE FANTASIA"],
+                            estacion["HORARIO REFERENCIAL"]
+                          )
+                        }
+                      >
+                        Horario
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <Pagination>{paginationItem}</Pagination>
+              </tfoot>
+            </Table>
+          </div>
         </div>
       ) : (
         <></>

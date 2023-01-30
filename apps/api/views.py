@@ -6,11 +6,14 @@ from .models import CacheCallsGD
 import ast
 from rest_framework.generics import ListAPIView
 from .serializers import *
+from rest_framework.renderers import JSONRenderer
 
-class LogCacheList(ListAPIView):		
-	serializer_class = LogCacheSerializer
-	def get_queryset(self):
-		return CacheCallsGD.objects.all()
+@api_view(['POST'])
+@csrf_exempt 
+def LogCacheList(request):		
+    aux = CacheCallsGD.objects.all()
+    serializador = LogCacheSerializer(aux)
+    return JSONRenderer(serializador.data)
 
 def generate_request(payload):
     response = requests.post('https://datos.gob.cl/api/3/action/datastore_search',json=payload)
@@ -26,6 +29,7 @@ def create_cache_register(page_aux,code_aux,cm_aux,result):
     aux_cache_register.page_filter = page_aux
     aux_cache_register.result = result
     aux_cache_register.save()
+
 
 def search_in_cache(page_aux,code_aux,cm_aux):
     aux = CacheCallsGD.objects.filter(code_filter=code_aux,comuna_filter = cm_aux, page_filter = page_aux).order_by("date_call")

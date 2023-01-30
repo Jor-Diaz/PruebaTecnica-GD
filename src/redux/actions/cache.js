@@ -8,7 +8,7 @@ export const get_cache_list = () => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(
+    const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/api/cache`,
       config
     );

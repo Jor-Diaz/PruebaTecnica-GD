@@ -44,5 +44,3 @@ export default function NavbarGD() {
     </>
   );
 }
-
-//<Nav.Link href="#features">Features</Nav.Link>
