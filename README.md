@@ -59,7 +59,7 @@
 
 ## About The Project
 
-- 👨🏽‍💻 This is my develop for the job of Full Stack Developer.
+- 👨🏽‍💻 This is my develop for the job of Full Stack Developer
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
