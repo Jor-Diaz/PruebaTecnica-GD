@@ -23,7 +23,7 @@
     <a href="https://github.com/Jor-Diaz/PruebaTecnica-GD"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="http://jd.serveblog.net">View Demo</a>
     ·
     <a href="https://github.com/Jor-Diaz/PruebaTecnica-GD/issues">Report Bug</a>
     ·
@@ -59,7 +59,7 @@
 
 ## About The Project
 
--.
+- 👨🏽‍💻 This is my develop for the job of Full Stack Developer.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -104,8 +104,7 @@ To run the repository, you must have the following installed on your computer
 
 ## Usage
 
-- In progress
-- Try see in -
+- Try see in http://jd.serveblog.net
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
@@ -130,7 +129,7 @@ Linkedin: [https://cl.linkedin.com/in/jdiazmatte](https://cl.linkedin.com/in/jdi
 
 ## Acknowledgments
 
-- react-router-doom , react-redux, redux-devtools-extension, axios, redux-thunk, redux, react-bootstrap, bootstrap,@heroicons/react, @heroicons/react@v1
+- ReactJs Libraries: react-router-doom , react-redux, redux-devtools-extension, axios, redux-thunk, redux, react-bootstrap, bootstrap,@heroicons/react, @heroicons/react@v1
 
 - [Choose an Open Source License](https://choosealicense.com)
 

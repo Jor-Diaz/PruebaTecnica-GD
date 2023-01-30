@@ -19,7 +19,7 @@ function App() {
           {/* Estaciones List Page */}
           <Route path="/estaciones" element={<Estaciones />} />
           {/* LogCache Page */}
-          <Route path="/logcache" element={<LogCache />} />
+          <Route path="/cache" element={<LogCache />} />
           {/* Contact Page */}
           <Route path="/contacto" element={<Contacto />} />
         </Routes>

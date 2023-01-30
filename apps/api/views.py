@@ -1,43 +1,20 @@
-import requests
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+from django.http.response import JsonResponse
 from .models import CacheCallsGD
-import ast
-from rest_framework.generics import ListAPIView
 from .serializers import *
-from rest_framework.renderers import JSONRenderer
+from .aux_functions import *
 
-@api_view(['POST'])
+import ast
+
+@api_view(['POST',])
 @csrf_exempt 
-def LogCacheList(request):		
-    aux = CacheCallsGD.objects.all()
-    serializador = LogCacheSerializer(aux)
-    return JSONRenderer(serializador.data)
+def LogCacheList(request):
+    items = CacheCallsGD.objects.all()
+    items_serializer = LogCacheSerializer(items, many=True)
+    return JsonResponse(items_serializer.data, safe=False)
 
-def generate_request(payload):
-    response = requests.post('https://datos.gob.cl/api/3/action/datastore_search',json=payload)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {'error':'error'}
-
-def create_cache_register(page_aux,code_aux,cm_aux,result):
-    aux_cache_register = CacheCallsGD()
-    aux_cache_register.code_filter = code_aux
-    aux_cache_register.comuna_filter = cm_aux
-    aux_cache_register.page_filter = page_aux
-    aux_cache_register.result = result
-    aux_cache_register.save()
-
-
-def search_in_cache(page_aux,code_aux,cm_aux):
-    aux = CacheCallsGD.objects.filter(code_filter=code_aux,comuna_filter = cm_aux, page_filter = page_aux).order_by("date_call")
-    if len(aux)>0:
-        return True, aux[0].result
-    else:
-        return False,[]
-    
 @api_view(['POST'])
 @csrf_exempt 
 def index(request):

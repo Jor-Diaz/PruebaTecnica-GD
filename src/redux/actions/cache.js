@@ -1,7 +1,7 @@
 import axios from "axios";
-import { GET_CACHE_LIST_SUCCESS, GET_CACHE_LIST_FAIL } from "./types";
+import { POST_CACHE_LIST_SUCCESS, POST_CACHE_LIST_FAIL } from "./types";
 
-export const get_cache_list = () => async (dispatch) => {
+export const post_cache_list = () => async (dispatch) => {
   const config = {
     headers: {
       Accept: "application/json",
@@ -14,17 +14,17 @@ export const get_cache_list = () => async (dispatch) => {
     );
     if (res.status === 200) {
       dispatch({
-        type: GET_CACHE_LIST_SUCCESS,
+        type: POST_CACHE_LIST_SUCCESS,
         payload: res.data,
       });
     } else {
       dispatch({
-        type: GET_CACHE_LIST_FAIL,
+        type: POST_CACHE_LIST_FAIL,
       });
     }
   } catch {
     dispatch({
-      type: GET_CACHE_LIST_FAIL,
+      type: POST_CACHE_LIST_FAIL,
     });
   }
 };

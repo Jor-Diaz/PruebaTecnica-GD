@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const navegation = [
   { name: "Estaciones", href: "/estaciones", current: "false" },
-  { name: "LogCache", href: "/logcache", current: "false" },
+  { name: "Cache", href: "/cache", current: "false" },
   { name: "Contacto", href: "/contacto", current: "false" },
 ];
 
@@ -13,17 +13,17 @@ export default function NavbarGD() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">
+          <NavLink to="/" className="nav-link text-white">
             {" "}
             <img
               src={logo}
               width="40"
-              height="30"
+              height="20"
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />
-            Inicio{" "}
-          </Navbar.Brand>
+            Inicio
+          </NavLink>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

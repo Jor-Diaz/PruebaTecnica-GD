@@ -1,9 +1,9 @@
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { useState } from "react";
-import { get_cache_list } from "redux/actions/cache";
+import { post_cache_list } from "redux/actions/cache";
 
-function LogCacheList({ cache_list, get_cache_list }) {
+function LogCacheList({ cache_list, post_cache_list }) {
   const formatDate = (current_datetime) => {
     let date_input = new Date(current_datetime);
     let formatted_date =
@@ -22,7 +22,7 @@ function LogCacheList({ cache_list, get_cache_list }) {
     return formatted_date;
   };
   useState(() => {
-    get_cache_list();
+    post_cache_list();
   }, []);
 
   return (
@@ -72,5 +72,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  get_cache_list,
+  post_cache_list,
 })(LogCacheList);

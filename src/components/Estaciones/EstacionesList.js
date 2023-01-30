@@ -102,7 +102,7 @@ function EstacionesDetail({
               </FloatingLabel>
             </Col>
             <Col md>
-              <FloatingLabel controlId="floatingInputGrid" label="Código Linea">
+              <FloatingLabel controlId="floatingInputGrid" label="Código Línea">
                 <Form.Control
                   type="text"
                   onChange={(event) => {
@@ -119,7 +119,8 @@ function EstacionesDetail({
                 onClick={(event) => {
                   setLoadingGif(false);
                   post_estaciones_list_page(0, codeStateGD, comunaStateGD);
-                  setPagination(count, 1);
+                  setShowTable(true);
+                  setLoadingGif(true);
                 }}
               >
                 Filtrar
@@ -137,7 +138,6 @@ function EstacionesDetail({
                 alt="React Bootstrap logo"
                 width="70"
                 height="70"
-                alt="loading..."
               />
             </div>
           </Row>
@@ -149,7 +149,7 @@ function EstacionesDetail({
             >
               <thead>
                 <tr>
-                  <th>Código Linea</th>
+                  <th>Código Línea</th>
                   <th>Nombre Fantasía</th>
                   <th>Dirección</th>
                   <th>Comuna</th>
@@ -173,7 +173,7 @@ function EstacionesDetail({
                           )
                         }
                       >
-                        Horario
+                        Ver Horario
                       </Button>
                     </td>
                   </tr>

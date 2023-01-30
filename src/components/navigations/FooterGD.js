@@ -1,5 +1,7 @@
 import logo from "media/logo.svg";
 import django from "media/django.png";
+import { Link } from "react-router-dom";
+
 export default function FooterGD() {
   return (
     <>
@@ -34,14 +36,15 @@ export default function FooterGD() {
             <h5>Prueba Técnica</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
-                <a href="/estaciones" className="nav-link p-0 text-muted">
+                <Link to="/estaciones" className="nav-link p-0 text-muted">
                   Listado Estaciones
-                </a>
+                </Link>
               </li>
+
               <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
+                <Link to="/" className="nav-link p-0 text-muted">
                   Inicio
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,14 +53,14 @@ export default function FooterGD() {
             <h5>Información</h5>
             <ul className="nav flex-column">
               <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
-                  Log Cache
-                </a>
+                <Link to="/cache" className="nav-link p-0 text-muted">
+                  Ver Cache
+                </Link>
               </li>
               <li className="nav-item mb-2">
-                <a href="#" className="nav-link p-0 text-muted">
+                <Link to="/contacto" className="nav-link p-0 text-muted">
                   Contacto
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
